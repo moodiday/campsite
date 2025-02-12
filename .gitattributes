@@ -6,3 +6,4 @@ vendor/* linguist-vendored
 
 # Mark the database schema as generated.
 packages/types/generated.ts linguist-generated
+*.env text eol=lf

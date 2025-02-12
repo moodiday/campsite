@@ -151,6 +151,10 @@ GEM
       activerecord (>= 4.2, < 8)
     doorkeeper (5.6.9)
       railties (>= 5)
+    dotenv (3.1.7)
+    dotenv-rails (3.1.7)
+      dotenv (= 3.1.7)
+      railties (>= 6.1)
     down (5.4.1)
       addressable (~> 2.8)
     drb (2.2.1)
@@ -546,6 +550,7 @@ DEPENDENCIES
   devise-two-factor
   discard
   doorkeeper (~> 5.6.9)
+  dotenv-rails
   down
   elasticsearch
   factory_bot_rails
@@ -579,7 +584,7 @@ DEPENDENCIES
   public_suffix
   puma (~> 6.4)
   pundit
-  pusher
+  pusher (~> 2.0)
   pwned
   rack-attack
   rack-cors
