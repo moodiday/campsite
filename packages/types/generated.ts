@@ -11529,7 +11529,7 @@ export class Api<SecurityDataType extends unknown> extends HttpClient<SecurityDa
      */
     postSignInDesktop: () => {
       const base = 'POST:/v1/sign-in/desktop' as const
-
+      console.log("base", base)
       return {
         baseKey: dataTaggedQueryKey<PostSignInDesktopData>([base]),
         requestKey: () => dataTaggedQueryKey<PostSignInDesktopData>([base]),

@@ -14,7 +14,7 @@ env:
   MYSQL_DB: campsite_api_test
   MYSQL_USER: root
   MYSQL_PASSWORD: root
-  DATABASE_HOST: 127.0.0.1
+  DATABASE_HOST: localhost
   RAILS_ENV: test
 
 jobs:
@@ -63,9 +63,9 @@ jobs:
       - name: Create MySQL database
         working-directory: api
         run: |
-          mysql -h 127.0.0.1 -e 'CREATE DATABASE ${{ env.MYSQL_DB }};' -u${{ env.MYSQL_USER }} -p${{ env.MYSQL_PASSWORD }}
-          mysql_tzinfo_to_sql /usr/share/zoneinfo | mysql -h 127.0.0.1 -u${{ env.MYSQL_USER }} -p${{ env.MYSQL_PASSWORD }} mysql
-          mysql -h 127.0.0.1 -u${{ env.MYSQL_USER }} -p${{ env.MYSQL_PASSWORD }} -e 'SELECT COUNT(*) FROM mysql.time_zone_name;'
+          mysql -h localhost -e 'CREATE DATABASE ${{ env.MYSQL_DB }};' -u${{ env.MYSQL_USER }} -p${{ env.MYSQL_PASSWORD }}
+          mysql_tzinfo_to_sql /usr/share/zoneinfo | mysql -h localhost -u${{ env.MYSQL_USER }} -p${{ env.MYSQL_PASSWORD }} mysql
+          mysql -h localhost -u${{ env.MYSQL_USER }} -p${{ env.MYSQL_PASSWORD }} -e 'SELECT COUNT(*) FROM mysql.time_zone_name;'
 
       - name: Setup Rails
         uses: ruby/setup-ruby@v1

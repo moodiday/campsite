@@ -28,6 +28,7 @@ const RAILS_AUTH_URL_PROD_COM = 'https://auth.campsite.com'
 
 export const RAILS_AUTH_URL = IS_PRODUCTION
   ? RAILS_AUTH_URL_PROD_COM
+  //: process.env.NEXT_PUBLIC_AUTH_URL || 'http://localhost:3001'
   : process.env.NEXT_PUBLIC_AUTH_URL || 'http://auth.campsite.test:3001'
 
 /*

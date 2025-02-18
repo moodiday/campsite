@@ -21,7 +21,9 @@ build
 .DS_Store
 *.pem
 .npmrc
-
+/api/config/database.yml
+/api/db/schema.rb
+/api/db/seeds.rb
 # debug
 npm-debug.log*
 yarn-debug.log*

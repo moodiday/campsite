@@ -11,7 +11,7 @@
 # It's strongly recommended that you check this file into your version control system.
 
 ActiveRecord::Schema[7.2].define(version: 2024_12_12_002307) do
-  create_table "attachments", id: { type: :bigint, unsigned: true }, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "attachments", id: { type: :bigint, unsigned: true }, force: :cascade do |t|
     t.string "public_id", limit: 12, null: false
     t.text "file_path", null: false
     t.string "file_type", null: false
@@ -44,7 +44,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_12_002307) do
     t.index ["transcription_job_status"], name: "index_attachments_on_transcription_job_status"
   end
 
-  create_table "bookmarks", id: { type: :bigint, unsigned: true }, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "bookmarks", id: { type: :bigint, unsigned: true }, force: :cascade do |t|
     t.string "public_id", limit: 12, null: false
     t.string "title", null: false
     t.text "url", null: false
@@ -58,7 +58,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_12_002307) do
     t.index ["public_id"], name: "index_bookmarks_on_public_id", unique: true
   end
 
-  create_table "call_peers", id: { type: :bigint, unsigned: true }, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "call_peers", id: { type: :bigint, unsigned: true }, force: :cascade do |t|
     t.bigint "call_id", null: false, unsigned: true
     t.bigint "organization_membership_id", unsigned: true
     t.datetime "joined_at", null: false
@@ -77,7 +77,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_12_002307) do
     t.index ["user_id"], name: "index_call_peers_on_user_id"
   end
 
-  create_table "call_recording_chat_links", id: { type: :bigint, unsigned: true }, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "call_recording_chat_links", id: { type: :bigint, unsigned: true }, force: :cascade do |t|
     t.bigint "call_recording_id", null: false, unsigned: true
     t.text "url", null: false
     t.string "sender_remote_peer_id", null: false
@@ -90,7 +90,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_12_002307) do
     t.index ["call_recording_id"], name: "index_call_recording_chat_links_on_call_recording_id"
   end
 
-  create_table "call_recording_speakers", id: { type: :bigint, unsigned: true }, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "call_recording_speakers", id: { type: :bigint, unsigned: true }, force: :cascade do |t|
     t.string "name", null: false
     t.bigint "call_recording_id", null: false, unsigned: true
     t.datetime "created_at", null: false
@@ -101,7 +101,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_12_002307) do
     t.index ["call_recording_id"], name: "index_call_recording_speakers_on_call_recording_id"
   end
 
-  create_table "call_recording_summary_sections", id: { type: :bigint, unsigned: true }, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "call_recording_summary_sections", id: { type: :bigint, unsigned: true }, force: :cascade do |t|
     t.bigint "call_recording_id", null: false, unsigned: true
     t.integer "status", default: 0, null: false
     t.integer "section", null: false
@@ -113,7 +113,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_12_002307) do
     t.index ["status"], name: "index_call_recording_summary_sections_on_status"
   end
 
-  create_table "call_recordings", id: { type: :bigint, unsigned: true }, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "call_recordings", id: { type: :bigint, unsigned: true }, force: :cascade do |t|
     t.string "public_id", limit: 12, null: false
     t.datetime "started_at", null: false
     t.datetime "stopped_at"
@@ -145,7 +145,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_12_002307) do
     t.index ["remote_transcription_id"], name: "index_call_recordings_on_remote_transcription_id"
   end
 
-  create_table "call_room_invitations", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "call_room_invitations", force: :cascade do |t|
     t.bigint "call_room_id", null: false, unsigned: true
     t.bigint "creator_organization_membership_id", null: false, unsigned: true
     t.json "invitee_organization_membership_ids", null: false
@@ -156,7 +156,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_12_002307) do
     t.index ["creator_organization_membership_id"], name: "idx_on_creator_organization_membership_id_2eb6938e76"
   end
 
-  create_table "call_rooms", id: { type: :bigint, unsigned: true }, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "call_rooms", id: { type: :bigint, unsigned: true }, force: :cascade do |t|
     t.string "subject_type"
     t.bigint "subject_id", unsigned: true
     t.string "remote_room_id"
@@ -173,7 +173,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_12_002307) do
     t.index ["subject_type", "subject_id"], name: "index_call_rooms_on_subject"
   end
 
-  create_table "calls", id: { type: :bigint, unsigned: true }, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "calls", id: { type: :bigint, unsigned: true }, force: :cascade do |t|
     t.datetime "started_at", null: false
     t.datetime "stopped_at"
     t.string "remote_session_id", null: false
@@ -196,7 +196,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_12_002307) do
     t.index ["started_at"], name: "index_calls_on_started_at"
   end
 
-  create_table "comments", id: { type: :bigint, unsigned: true }, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "comments", id: { type: :bigint, unsigned: true }, force: :cascade do |t|
     t.string "public_id", limit: 12, null: false
     t.bigint "organization_membership_id", unsigned: true
     t.string "subject_type", null: false
@@ -229,7 +229,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_12_002307) do
     t.index ["subject_type", "subject_id"], name: "index_comments_on_subject"
   end
 
-  create_table "console1984_commands", id: { type: :bigint, unsigned: true }, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "console1984_commands", id: { type: :bigint, unsigned: true }, force: :cascade do |t|
     t.text "statements"
     t.bigint "sensitive_access_id"
     t.bigint "session_id", null: false
@@ -239,7 +239,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_12_002307) do
     t.index ["session_id", "created_at", "sensitive_access_id"], name: "on_session_and_sensitive_chronologically"
   end
 
-  create_table "console1984_sensitive_accesses", id: { type: :bigint, unsigned: true }, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "console1984_sensitive_accesses", id: { type: :bigint, unsigned: true }, force: :cascade do |t|
     t.text "justification"
     t.bigint "session_id", null: false
     t.datetime "created_at", null: false
@@ -247,7 +247,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_12_002307) do
     t.index ["session_id"], name: "index_console1984_sensitive_accesses_on_session_id"
   end
 
-  create_table "console1984_sessions", id: { type: :bigint, unsigned: true }, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "console1984_sessions", id: { type: :bigint, unsigned: true }, force: :cascade do |t|
     t.text "reason"
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
@@ -256,14 +256,14 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_12_002307) do
     t.index ["user_id", "created_at"], name: "index_console1984_sessions_on_user_id_and_created_at"
   end
 
-  create_table "console1984_users", id: { type: :bigint, unsigned: true }, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "console1984_users", id: { type: :bigint, unsigned: true }, force: :cascade do |t|
     t.string "username", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["username"], name: "index_console1984_users_on_username"
   end
 
-  create_table "custom_reactions", id: { type: :bigint, unsigned: true }, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "custom_reactions", id: { type: :bigint, unsigned: true }, force: :cascade do |t|
     t.string "public_id", limit: 12, null: false
     t.string "name", null: false
     t.text "file_path", null: false
@@ -279,7 +279,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_12_002307) do
     t.index ["public_id"], name: "index_custom_reactions_on_public_id", unique: true
   end
 
-  create_table "data_export_resources", id: { type: :bigint, unsigned: true }, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "data_export_resources", id: { type: :bigint, unsigned: true }, force: :cascade do |t|
     t.bigint "data_export_id", null: false, unsigned: true
     t.integer "resource_id"
     t.integer "resource_type", null: false
@@ -290,7 +290,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_12_002307) do
     t.index ["data_export_id"], name: "index_data_export_resources_on_data_export_id"
   end
 
-  create_table "data_exports", id: { type: :bigint, unsigned: true }, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "data_exports", id: { type: :bigint, unsigned: true }, force: :cascade do |t|
     t.string "public_id", limit: 12, null: false
     t.string "subject_type", null: false
     t.bigint "subject_id", null: false, unsigned: true
@@ -304,14 +304,14 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_12_002307) do
     t.index ["subject_type", "subject_id"], name: "index_data_exports_on_subject"
   end
 
-  create_table "email_bounces", id: { type: :bigint, unsigned: true }, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "email_bounces", id: { type: :bigint, unsigned: true }, force: :cascade do |t|
     t.text "email", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_email_bounces_on_email", unique: true, length: 320
   end
 
-  create_table "events", id: { type: :bigint, unsigned: true }, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "events", id: { type: :bigint, unsigned: true }, force: :cascade do |t|
     t.string "actor_type"
     t.bigint "actor_id", unsigned: true
     t.string "subject_type", null: false
@@ -328,7 +328,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_12_002307) do
     t.index ["subject_type", "subject_id"], name: "index_events_on_subject"
   end
 
-  create_table "external_records", id: { type: :bigint, unsigned: true }, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "external_records", id: { type: :bigint, unsigned: true }, force: :cascade do |t|
     t.string "remote_record_id", null: false
     t.string "remote_record_title", null: false
     t.integer "service", null: false
@@ -340,7 +340,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_12_002307) do
     t.index ["service", "remote_record_id"], name: "index_external_records_on_service_and_remote_record_id", unique: true
   end
 
-  create_table "favorites", id: { type: :bigint, unsigned: true }, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "favorites", id: { type: :bigint, unsigned: true }, force: :cascade do |t|
     t.string "public_id", limit: 12, null: false
     t.string "favoritable_type", null: false
     t.bigint "favoritable_id", null: false, unsigned: true
@@ -353,7 +353,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_12_002307) do
     t.index ["public_id"], name: "index_favorites_on_public_id", unique: true
   end
 
-  create_table "feedbacks", id: { type: :bigint, unsigned: true }, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "feedbacks", id: { type: :bigint, unsigned: true }, force: :cascade do |t|
     t.text "description", null: false
     t.integer "feedback_type", null: false, unsigned: true
     t.datetime "posted_to_linear_at"
@@ -370,7 +370,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_12_002307) do
     t.index ["user_id"], name: "index_feedbacks_on_user_id"
   end
 
-  create_table "figma_files", id: { type: :bigint, unsigned: true }, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "figma_files", id: { type: :bigint, unsigned: true }, force: :cascade do |t|
     t.string "remote_file_key", null: false
     t.string "name", null: false
     t.datetime "created_at", null: false
@@ -378,7 +378,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_12_002307) do
     t.index ["remote_file_key"], name: "index_figma_files_on_remote_file_key", unique: true
   end
 
-  create_table "figma_key_pairs", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "figma_key_pairs", force: :cascade do |t|
     t.string "read_key", null: false
     t.string "write_key", null: false
     t.datetime "created_at", null: false
@@ -387,7 +387,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_12_002307) do
     t.index ["write_key"], name: "index_figma_key_pairs_on_write_key"
   end
 
-  create_table "figma_users", id: { type: :bigint, unsigned: true }, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "figma_users", id: { type: :bigint, unsigned: true }, force: :cascade do |t|
     t.bigint "user_id", null: false, unsigned: true
     t.string "remote_user_id", null: false
     t.string "handle", null: false
@@ -398,7 +398,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_12_002307) do
     t.index ["user_id"], name: "index_figma_users_on_user_id"
   end
 
-  create_table "flipper_audit_logs", id: { type: :bigint, unsigned: true }, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "flipper_audit_logs", id: { type: :bigint, unsigned: true }, force: :cascade do |t|
     t.bigint "user_id", unsigned: true
     t.string "operation", null: false
     t.string "feature_name", null: false
@@ -411,14 +411,14 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_12_002307) do
     t.index ["user_id"], name: "index_flipper_audit_logs_on_user_id"
   end
 
-  create_table "flipper_features", id: { type: :bigint, unsigned: true }, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "flipper_features", id: { type: :bigint, unsigned: true }, force: :cascade do |t|
     t.string "key", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["key"], name: "index_flipper_features_on_key", unique: true
   end
 
-  create_table "flipper_gates", id: { type: :bigint, unsigned: true }, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "flipper_gates", id: { type: :bigint, unsigned: true }, force: :cascade do |t|
     t.string "feature_key", null: false
     t.string "key", null: false
     t.string "value"
@@ -427,7 +427,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_12_002307) do
     t.index ["feature_key", "key", "value"], name: "index_flipper_gates_on_feature_key_and_key_and_value", unique: true
   end
 
-  create_table "follow_ups", id: { type: :bigint, unsigned: true }, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "follow_ups", id: { type: :bigint, unsigned: true }, force: :cascade do |t|
     t.string "public_id", limit: 12, null: false
     t.bigint "organization_membership_id", null: false, unsigned: true
     t.string "subject_type", null: false
@@ -442,7 +442,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_12_002307) do
     t.index ["subject_type", "subject_id"], name: "index_follow_ups_on_subject"
   end
 
-  create_table "friendly_id_slugs", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "friendly_id_slugs", force: :cascade do |t|
     t.string "slug", null: false
     t.integer "sluggable_id", null: false
     t.string "sluggable_type", limit: 50
@@ -453,7 +453,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_12_002307) do
     t.index ["sluggable_type", "sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_type_and_sluggable_id"
   end
 
-  create_table "github_repositories", id: { type: :bigint, unsigned: true }, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "github_repositories", id: { type: :bigint, unsigned: true }, force: :cascade do |t|
     t.bigint "provider_repository_id", null: false, unsigned: true
     t.string "full_name", null: false
     t.boolean "private", default: false, null: false
@@ -465,7 +465,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_12_002307) do
     t.index ["integration_id"], name: "index_github_repositories_on_integration_id"
   end
 
-  create_table "integration_channel_members", id: { type: :bigint, unsigned: true }, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "integration_channel_members", id: { type: :bigint, unsigned: true }, force: :cascade do |t|
     t.string "provider_member_id", null: false
     t.bigint "integration_channel_id", null: false, unsigned: true
     t.datetime "created_at", null: false
@@ -475,7 +475,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_12_002307) do
     t.index ["provider_member_id"], name: "index_integration_channel_members_on_provider_member_id"
   end
 
-  create_table "integration_channels", id: { type: :bigint, unsigned: true }, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "integration_channels", id: { type: :bigint, unsigned: true }, force: :cascade do |t|
     t.string "provider_channel_id", null: false
     t.string "name", null: false
     t.boolean "private", default: false, null: false
@@ -490,7 +490,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_12_002307) do
     t.index ["public_id"], name: "index_integration_channels_on_public_id", unique: true
   end
 
-  create_table "integration_data", id: { type: :bigint, unsigned: true }, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "integration_data", id: { type: :bigint, unsigned: true }, force: :cascade do |t|
     t.string "name", null: false
     t.string "value", null: false
     t.bigint "integration_id", null: false, unsigned: true
@@ -499,7 +499,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_12_002307) do
     t.index ["integration_id"], name: "index_integration_data_on_integration_id"
   end
 
-  create_table "integration_organization_membership_data", id: { type: :bigint, unsigned: true }, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "integration_organization_membership_data", id: { type: :bigint, unsigned: true }, force: :cascade do |t|
     t.bigint "integration_organization_membership_id", null: false, unsigned: true
     t.string "name", null: false
     t.string "value", null: false
@@ -508,7 +508,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_12_002307) do
     t.index ["integration_organization_membership_id"], name: "index_integration_org_member_data_on_integration_org_member"
   end
 
-  create_table "integration_organization_memberships", id: { type: :bigint, unsigned: true }, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "integration_organization_memberships", id: { type: :bigint, unsigned: true }, force: :cascade do |t|
     t.bigint "integration_id", null: false, unsigned: true
     t.bigint "organization_membership_id", null: false, unsigned: true
     t.datetime "created_at", null: false
@@ -518,7 +518,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_12_002307) do
     t.index ["organization_membership_id"], name: "index_integration_org_members_on_member"
   end
 
-  create_table "integration_teams", id: { type: :bigint, unsigned: true }, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "integration_teams", id: { type: :bigint, unsigned: true }, force: :cascade do |t|
     t.string "name", null: false
     t.string "public_id", limit: 12, null: false
     t.string "provider_team_id", null: false
@@ -533,7 +533,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_12_002307) do
     t.index ["public_id"], name: "index_integration_teams_on_public_id", unique: true
   end
 
-  create_table "integrations", id: { type: :bigint, unsigned: true }, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "integrations", id: { type: :bigint, unsigned: true }, force: :cascade do |t|
     t.string "public_id", limit: 12, null: false
     t.string "provider", null: false
     t.string "token", null: false
@@ -550,7 +550,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_12_002307) do
     t.index ["public_id"], name: "index_integrations_on_public_id", unique: true
   end
 
-  create_table "llm_responses", id: { type: :bigint, unsigned: true }, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "llm_responses", id: { type: :bigint, unsigned: true }, force: :cascade do |t|
     t.string "subject_type", null: false
     t.bigint "subject_id", null: false, unsigned: true
     t.string "invocation_key", null: false
@@ -564,7 +564,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_12_002307) do
     t.index ["subject_type", "subject_id"], name: "index_llm_responses_on_subject"
   end
 
-  create_table "message_notifications", id: { type: :bigint, unsigned: true }, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "message_notifications", id: { type: :bigint, unsigned: true }, force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "message_thread_membership_id", unsigned: true
@@ -574,7 +574,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_12_002307) do
     t.index ["message_thread_membership_id"], name: "index_message_notifications_on_message_thread_membership_id"
   end
 
-  create_table "message_thread_membership_updates", id: { type: :bigint, unsigned: true }, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "message_thread_membership_updates", id: { type: :bigint, unsigned: true }, force: :cascade do |t|
     t.bigint "message_thread_id", null: false, unsigned: true
     t.bigint "actor_id", null: false, unsigned: true
     t.json "added_organization_membership_ids"
@@ -589,7 +589,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_12_002307) do
     t.index ["message_thread_id"], name: "index_message_thread_membership_updates_on_message_thread_id"
   end
 
-  create_table "message_thread_memberships", id: { type: :bigint, unsigned: true }, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "message_thread_memberships", id: { type: :bigint, unsigned: true }, force: :cascade do |t|
     t.bigint "message_thread_id", null: false, unsigned: true
     t.bigint "organization_membership_id", unsigned: true
     t.datetime "last_read_at"
@@ -607,7 +607,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_12_002307) do
     t.index ["organization_membership_id"], name: "index_message_thread_memberships_on_organization_membership_id"
   end
 
-  create_table "message_threads", id: { type: :bigint, unsigned: true }, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "message_threads", id: { type: :bigint, unsigned: true }, force: :cascade do |t|
     t.bigint "owner_id", null: false, unsigned: true
     t.string "public_id", limit: 12, null: false
     t.string "title"
@@ -629,7 +629,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_12_002307) do
     t.index ["public_id"], name: "index_message_threads_on_public_id", unique: true
   end
 
-  create_table "messages", id: { type: :bigint, unsigned: true }, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "messages", id: { type: :bigint, unsigned: true }, force: :cascade do |t|
     t.bigint "message_thread_id", null: false, unsigned: true
     t.bigint "sender_id", unsigned: true
     t.text "content", null: false
@@ -654,7 +654,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_12_002307) do
     t.index ["system_shared_post_id"], name: "index_messages_on_system_shared_post_id"
   end
 
-  create_table "non_member_note_views", id: { type: :bigint, unsigned: true }, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "non_member_note_views", id: { type: :bigint, unsigned: true }, force: :cascade do |t|
     t.bigint "note_id", null: false, unsigned: true
     t.bigint "user_id", unsigned: true
     t.string "anonymized_ip", null: false
@@ -667,7 +667,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_12_002307) do
     t.index ["user_id"], name: "index_non_member_note_views_on_user_id"
   end
 
-  create_table "non_member_post_views", id: { type: :bigint, unsigned: true }, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "non_member_post_views", id: { type: :bigint, unsigned: true }, force: :cascade do |t|
     t.bigint "post_id", null: false, unsigned: true
     t.bigint "user_id", unsigned: true
     t.string "anonymized_ip", null: false
@@ -680,7 +680,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_12_002307) do
     t.index ["user_id"], name: "index_non_member_post_views_on_user_id"
   end
 
-  create_table "note_views", id: { type: :bigint, unsigned: true }, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "note_views", id: { type: :bigint, unsigned: true }, force: :cascade do |t|
     t.bigint "note_id", null: false, unsigned: true
     t.bigint "organization_membership_id", null: false, unsigned: true
     t.datetime "created_at", null: false
@@ -690,7 +690,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_12_002307) do
     t.index ["organization_membership_id"], name: "index_note_views_on_organization_membership_id"
   end
 
-  create_table "notes", id: { type: :bigint, unsigned: true }, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "notes", id: { type: :bigint, unsigned: true }, force: :cascade do |t|
     t.string "public_id", limit: 12, null: false
     t.integer "comments_count", default: 0, null: false, unsigned: true
     t.datetime "discarded_at"
@@ -720,7 +720,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_12_002307) do
     t.index ["public_id"], name: "index_notes_on_public_id", unique: true
   end
 
-  create_table "notification_schedules", id: { type: :bigint, unsigned: true }, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "notification_schedules", id: { type: :bigint, unsigned: true }, force: :cascade do |t|
     t.bigint "user_id", null: false, unsigned: true
     t.time "start_time", null: false
     t.time "end_time", null: false
@@ -746,7 +746,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_12_002307) do
     t.index ["wednesday"], name: "index_notification_schedules_on_wednesday"
   end
 
-  create_table "notifications", id: { type: :bigint, unsigned: true }, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "notifications", id: { type: :bigint, unsigned: true }, force: :cascade do |t|
     t.bigint "organization_membership_id", null: false, unsigned: true
     t.bigint "event_id", null: false, unsigned: true
     t.datetime "read_at"
@@ -772,7 +772,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_12_002307) do
     t.index ["target_type", "target_id"], name: "index_notifications_on_target"
   end
 
-  create_table "oauth_access_grants", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "oauth_access_grants", force: :cascade do |t|
     t.string "resource_owner_type", null: false
     t.bigint "resource_owner_id", null: false
     t.bigint "application_id", null: false
@@ -788,7 +788,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_12_002307) do
     t.index ["resource_owner_type", "resource_owner_id"], name: "index_oauth_access_grants_on_resource_owner"
   end
 
-  create_table "oauth_access_tokens", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "oauth_access_tokens", force: :cascade do |t|
     t.bigint "resource_owner_id"
     t.bigint "application_id", null: false
     t.string "token", null: false
@@ -807,7 +807,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_12_002307) do
     t.index ["token"], name: "index_oauth_access_tokens_on_token", unique: true
   end
 
-  create_table "oauth_applications", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "oauth_applications", force: :cascade do |t|
     t.string "public_id", limit: 12, null: false
     t.string "name", null: false
     t.string "uid", null: false
@@ -831,7 +831,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_12_002307) do
     t.index ["uid"], name: "index_oauth_applications_on_uid", unique: true
   end
 
-  create_table "open_graph_links", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "open_graph_links", force: :cascade do |t|
     t.text "url", null: false
     t.text "title", null: false
     t.text "image_path"
@@ -840,7 +840,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_12_002307) do
     t.text "favicon_path"
   end
 
-  create_table "organization_invitation_projects", id: { type: :bigint, unsigned: true }, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "organization_invitation_projects", id: { type: :bigint, unsigned: true }, force: :cascade do |t|
     t.bigint "project_id", null: false, unsigned: true
     t.bigint "organization_invitation_id", null: false, unsigned: true
     t.datetime "created_at", null: false
@@ -849,7 +849,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_12_002307) do
     t.index ["project_id"], name: "index_organization_invitation_projects_on_project_id"
   end
 
-  create_table "organization_invitations", id: { type: :bigint, unsigned: true }, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "organization_invitations", id: { type: :bigint, unsigned: true }, force: :cascade do |t|
     t.string "public_id", limit: 12, null: false
     t.text "email", null: false
     t.bigint "organization_id", null: false, unsigned: true
@@ -869,7 +869,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_12_002307) do
     t.index ["sender_id"], name: "index_organization_invitations_on_sender_id"
   end
 
-  create_table "organization_membership_requests", id: { type: :bigint, unsigned: true }, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "organization_membership_requests", id: { type: :bigint, unsigned: true }, force: :cascade do |t|
     t.string "public_id", limit: 12, null: false
     t.bigint "user_id", null: false
     t.bigint "organization_id", null: false, unsigned: true
@@ -881,7 +881,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_12_002307) do
     t.index ["user_id"], name: "index_organization_membership_requests_on_user_id"
   end
 
-  create_table "organization_membership_statuses", id: { type: :bigint, unsigned: true }, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "organization_membership_statuses", id: { type: :bigint, unsigned: true }, force: :cascade do |t|
     t.string "message", null: false
     t.string "emoji", null: false
     t.datetime "expires_at"
@@ -895,7 +895,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_12_002307) do
     t.index ["organization_membership_id"], name: "idx_on_organization_membership_id_16e938dd29"
   end
 
-  create_table "organization_memberships", id: { type: :bigint, unsigned: true }, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "organization_memberships", id: { type: :bigint, unsigned: true }, force: :cascade do |t|
     t.string "public_id", limit: 12, null: false
     t.bigint "organization_id", null: false, unsigned: true
     t.bigint "user_id", null: false
@@ -920,7 +920,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_12_002307) do
     t.index ["user_id"], name: "index_organization_memberships_on_user_id"
   end
 
-  create_table "organization_settings", id: { type: :bigint, unsigned: true }, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "organization_settings", id: { type: :bigint, unsigned: true }, force: :cascade do |t|
     t.string "key", null: false
     t.string "value", null: false
     t.bigint "organization_id", null: false, unsigned: true
@@ -930,7 +930,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_12_002307) do
     t.index ["organization_id"], name: "index_organization_settings_on_organization_id"
   end
 
-  create_table "organizations", id: { type: :bigint, unsigned: true }, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "organizations", id: { type: :bigint, unsigned: true }, force: :cascade do |t|
     t.string "public_id", limit: 12, null: false
     t.string "name", null: false
     t.string "slug", null: false
@@ -957,7 +957,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_12_002307) do
     t.index ["slug"], name: "index_organizations_on_slug", unique: true
   end
 
-  create_table "permissions", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "permissions", force: :cascade do |t|
     t.bigint "user_id", null: false, unsigned: true
     t.string "subject_type", null: false
     t.bigint "subject_id", null: false, unsigned: true
@@ -973,7 +973,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_12_002307) do
     t.index ["user_id"], name: "index_permissions_on_user_id"
   end
 
-  create_table "poll_options", id: { type: :bigint, unsigned: true }, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "poll_options", id: { type: :bigint, unsigned: true }, force: :cascade do |t|
     t.string "public_id", limit: 12, null: false
     t.string "description", null: false
     t.integer "votes_count", default: 0
@@ -982,7 +982,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_12_002307) do
     t.index ["public_id"], name: "index_poll_options_on_public_id", unique: true
   end
 
-  create_table "poll_votes", id: { type: :bigint, unsigned: true }, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "poll_votes", id: { type: :bigint, unsigned: true }, force: :cascade do |t|
     t.bigint "poll_option_id", null: false, unsigned: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -991,7 +991,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_12_002307) do
     t.index ["poll_option_id"], name: "index_poll_votes_on_poll_option_id"
   end
 
-  create_table "polls", id: { type: :bigint, unsigned: true }, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "polls", id: { type: :bigint, unsigned: true }, force: :cascade do |t|
     t.string "public_id", limit: 12, null: false
     t.string "description", null: false
     t.integer "votes_count", default: 0
@@ -1002,7 +1002,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_12_002307) do
     t.index ["public_id"], name: "index_polls_on_public_id", unique: true
   end
 
-  create_table "post_digest_basic_posts", id: { type: :bigint, unsigned: true }, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "post_digest_basic_posts", id: { type: :bigint, unsigned: true }, force: :cascade do |t|
     t.bigint "post_id", null: false, unsigned: true
     t.bigint "post_digest_id", null: false, unsigned: true
     t.integer "position", default: 0
@@ -1013,7 +1013,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_12_002307) do
     t.index ["post_id"], name: "index_post_digest_basic_posts_on_post_id"
   end
 
-  create_table "post_digest_notes", id: { type: :bigint, unsigned: true }, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "post_digest_notes", id: { type: :bigint, unsigned: true }, force: :cascade do |t|
     t.string "public_id", limit: 12, null: false
     t.text "title", null: false
     t.text "content"
@@ -1031,7 +1031,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_12_002307) do
     t.index ["public_id"], name: "index_post_digest_notes_on_public_id", unique: true
   end
 
-  create_table "post_digests", id: { type: :bigint, unsigned: true }, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "post_digests", id: { type: :bigint, unsigned: true }, force: :cascade do |t|
     t.string "public_id", limit: 12, null: false
     t.bigint "organization_id", null: false, unsigned: true
     t.bigint "creator_id", null: false, unsigned: true
@@ -1053,7 +1053,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_12_002307) do
     t.index ["public_id"], name: "index_post_digests_on_public_id", unique: true
   end
 
-  create_table "post_feedback_requests", id: { type: :bigint, unsigned: true }, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "post_feedback_requests", id: { type: :bigint, unsigned: true }, force: :cascade do |t|
     t.string "public_id", limit: 12, null: false
     t.boolean "has_replied", default: false, null: false
     t.datetime "created_at", null: false
@@ -1069,7 +1069,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_12_002307) do
     t.index ["public_id"], name: "index_post_feedback_requests_on_public_id", unique: true
   end
 
-  create_table "post_hierarchies", id: false, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "post_hierarchies", id: false, force: :cascade do |t|
     t.integer "ancestor_id", null: false
     t.integer "descendant_id", null: false
     t.integer "generations", null: false
@@ -1077,7 +1077,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_12_002307) do
     t.index ["descendant_id"], name: "post_desc_idx"
   end
 
-  create_table "post_link_previews", id: { type: :bigint, unsigned: true }, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "post_link_previews", id: { type: :bigint, unsigned: true }, force: :cascade do |t|
     t.string "public_id", limit: 12, null: false
     t.text "url", null: false
     t.string "title", null: false
@@ -1094,7 +1094,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_12_002307) do
     t.index ["public_id"], name: "index_post_link_previews_on_public_id", unique: true
   end
 
-  create_table "post_links", id: { type: :bigint, unsigned: true }, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "post_links", id: { type: :bigint, unsigned: true }, force: :cascade do |t|
     t.string "public_id", limit: 12, null: false
     t.text "url", null: false
     t.string "name", null: false
@@ -1105,7 +1105,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_12_002307) do
     t.index ["public_id"], name: "index_post_links_on_public_id", unique: true
   end
 
-  create_table "post_taggings", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "post_taggings", force: :cascade do |t|
     t.bigint "tag_id"
     t.bigint "post_id"
     t.datetime "created_at", null: false
@@ -1115,7 +1115,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_12_002307) do
     t.index ["tag_id"], name: "index_post_taggings_on_tag_id"
   end
 
-  create_table "post_views", id: { type: :bigint, unsigned: true }, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "post_views", id: { type: :bigint, unsigned: true }, force: :cascade do |t|
     t.string "public_id", limit: 12, null: false
     t.bigint "post_id", null: false, unsigned: true
     t.datetime "created_at", null: false
@@ -1131,7 +1131,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_12_002307) do
     t.index ["read_at"], name: "index_post_views_on_read_at"
   end
 
-  create_table "posts", id: { type: :bigint, unsigned: true }, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "posts", id: { type: :bigint, unsigned: true }, force: :cascade do |t|
     t.string "public_id", limit: 12, null: false
     t.string "slack_message_ts"
     t.bigint "organization_id", null: false, unsigned: true
@@ -1191,7 +1191,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_12_002307) do
     t.index ["workflow_state"], name: "index_posts_on_workflow_state"
   end
 
-  create_table "preferences", id: { type: :bigint, unsigned: true }, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "preferences", id: { type: :bigint, unsigned: true }, force: :cascade do |t|
     t.bigint "subject_id", null: false, unsigned: true
     t.string "subject_type", null: false
     t.string "key", null: false
@@ -1203,7 +1203,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_12_002307) do
     t.index ["subject_id", "subject_type"], name: "index_preferences_on_subject_id_and_subject_type"
   end
 
-  create_table "product_logs", id: { type: :bigint, unsigned: true }, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "product_logs", id: { type: :bigint, unsigned: true }, force: :cascade do |t|
     t.string "subject_type"
     t.bigint "subject_id", unsigned: true
     t.datetime "log_ts", null: false
@@ -1242,7 +1242,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_12_002307) do
     t.index ["subject_type", "subject_id"], name: "index_product_logs_on_subject"
   end
 
-  create_table "project_display_preferences", id: { type: :bigint, unsigned: true }, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "project_display_preferences", id: { type: :bigint, unsigned: true }, force: :cascade do |t|
     t.bigint "project_id", null: false, unsigned: true
     t.bigint "organization_membership_id", null: false, unsigned: true
     t.boolean "display_reactions", default: true, null: false
@@ -1256,7 +1256,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_12_002307) do
     t.index ["project_id"], name: "index_project_display_preferences_on_project_id"
   end
 
-  create_table "project_memberships", id: { type: :bigint, unsigned: true }, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "project_memberships", id: { type: :bigint, unsigned: true }, force: :cascade do |t|
     t.string "public_id", limit: 12, null: false
     t.integer "position"
     t.bigint "project_id", null: false, unsigned: true
@@ -1274,7 +1274,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_12_002307) do
     t.index ["public_id"], name: "index_project_memberships_on_public_id", unique: true
   end
 
-  create_table "project_pins", id: { type: :bigint, unsigned: true }, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "project_pins", id: { type: :bigint, unsigned: true }, force: :cascade do |t|
     t.bigint "project_id", null: false, unsigned: true
     t.bigint "organization_membership_id", null: false, unsigned: true
     t.string "subject_type", null: false
@@ -1292,7 +1292,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_12_002307) do
     t.index ["subject_type", "subject_id"], name: "index_project_pins_on_subject"
   end
 
-  create_table "project_views", id: { type: :bigint, unsigned: true }, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "project_views", id: { type: :bigint, unsigned: true }, force: :cascade do |t|
     t.bigint "organization_membership_id", null: false, unsigned: true
     t.bigint "project_id", null: false, unsigned: true
     t.timestamp "last_viewed_at", null: false
@@ -1305,7 +1305,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_12_002307) do
     t.index ["project_id"], name: "index_project_views_on_project_id"
   end
 
-  create_table "projects", id: { type: :bigint, unsigned: true }, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "projects", id: { type: :bigint, unsigned: true }, force: :cascade do |t|
     t.string "public_id", limit: 12, null: false
     t.string "name", null: false
     t.text "description"
@@ -1346,7 +1346,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_12_002307) do
     t.index ["public_id"], name: "index_projects_on_public_id", unique: true
   end
 
-  create_table "reactions", id: { type: :bigint, unsigned: true }, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "reactions", id: { type: :bigint, unsigned: true }, force: :cascade do |t|
     t.string "public_id", limit: 12, null: false
     t.string "content"
     t.bigint "subject_id", null: false, unsigned: true
@@ -1363,7 +1363,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_12_002307) do
     t.index ["subject_id", "subject_type"], name: "index_reactions_on_subject_id_and_subject_type"
   end
 
-  create_table "scheduled_notifications", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "scheduled_notifications", force: :cascade do |t|
     t.string "public_id", limit: 12, null: false
     t.string "name", null: false
     t.time "delivery_time", null: false
@@ -1380,7 +1380,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_12_002307) do
     t.index ["time_zone", "delivery_time", "delivery_day"], name: "idx_scheduled_notifications_on_day_and_time_and_time_zone"
   end
 
-  create_table "tags", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "tags", force: :cascade do |t|
     t.string "public_id", limit: 12, null: false
     t.string "name", limit: 32, null: false
     t.bigint "organization_id", null: false, unsigned: true
@@ -1393,7 +1393,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_12_002307) do
     t.index ["public_id"], name: "index_tags_on_public_id", unique: true
   end
 
-  create_table "timeline_events", id: { type: :bigint, unsigned: true }, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "timeline_events", id: { type: :bigint, unsigned: true }, force: :cascade do |t|
     t.string "actor_type"
     t.bigint "actor_id", unsigned: true
     t.string "subject_type", null: false
@@ -1412,7 +1412,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_12_002307) do
     t.index ["subject_type", "subject_id"], name: "index_timeline_events_on_subject"
   end
 
-  create_table "user_preferences", id: { type: :bigint, unsigned: true }, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "user_preferences", id: { type: :bigint, unsigned: true }, force: :cascade do |t|
     t.integer "user_id", null: false
     t.string "key", null: false
     t.string "value", null: false
@@ -1422,7 +1422,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_12_002307) do
     t.index ["user_id"], name: "index_user_preferences_on_user_id"
   end
 
-  create_table "user_subscriptions", id: { type: :bigint, unsigned: true }, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "user_subscriptions", id: { type: :bigint, unsigned: true }, force: :cascade do |t|
     t.string "public_id", limit: 12, null: false
     t.string "subscribable_type", null: false
     t.bigint "subscribable_id", null: false, unsigned: true
@@ -1436,7 +1436,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_12_002307) do
     t.index ["user_id"], name: "index_user_subscriptions_on_user_id"
   end
 
-  create_table "users", id: { type: :bigint, unsigned: true }, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "users", id: { type: :bigint, unsigned: true }, force: :cascade do |t|
     t.string "username"
     t.string "name"
     t.string "public_id", limit: 12, null: false
@@ -1481,7 +1481,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_12_002307) do
     t.index ["username"], name: "index_users_on_username", unique: true
   end
 
-  create_table "web_push_subscriptions", id: { type: :bigint, unsigned: true }, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "web_push_subscriptions", id: { type: :bigint, unsigned: true }, force: :cascade do |t|
     t.bigint "user_id", null: false, unsigned: true
     t.text "endpoint", null: false
     t.string "p256dh", null: false
@@ -1491,7 +1491,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_12_002307) do
     t.index ["user_id"], name: "index_web_push_subscriptions_on_user_id"
   end
 
-  create_table "webhook_deliveries", id: { type: :bigint, unsigned: true }, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "webhook_deliveries", id: { type: :bigint, unsigned: true }, force: :cascade do |t|
     t.string "public_id", limit: 12, null: false
     t.integer "status_code"
     t.datetime "delivered_at"
@@ -1503,7 +1503,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_12_002307) do
     t.index ["webhook_event_id"], name: "index_webhook_deliveries_on_webhook_event_id"
   end
 
-  create_table "webhook_events", id: { type: :bigint, unsigned: true }, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "webhook_events", id: { type: :bigint, unsigned: true }, force: :cascade do |t|
     t.string "public_id", limit: 12, null: false
     t.string "event_type", null: false
     t.json "payload", null: false
@@ -1521,7 +1521,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_12_12_002307) do
     t.index ["webhook_id"], name: "index_webhook_events_on_webhook_id"
   end
 
-  create_table "webhooks", id: { type: :bigint, unsigned: true }, charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
+  create_table "webhooks", id: { type: :bigint, unsigned: true }, force: :cascade do |t|
     t.string "public_id", limit: 12, null: false
     t.string "url", null: false
     t.integer "state", default: 0, null: false
